@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Discover English | Ms. Trang Trieu Education</title>
+  <meta name="robots" content="noindex">
+  <style>body{margin:0;background:#f3f6f9;color:#0b1337;font:700 18px/1.5 Arial,sans-serif;display:grid;min-height:100vh;place-items:center}p{padding:24px;text-align:center}</style>
+</head>
+<body>
+  <p>Đang mở bài Discover English…</p>
+  <script>
+    const value = Number(new URLSearchParams(location.search).get("lesson") || "1");
+    const lesson = Number.isInteger(value) && value >= 1 && value <= 50 ? value : 1;
+    location.replace(`./lesson-${String(lesson).padStart(2, "0")}/${location.hash}`);
+  </script>
+</body>
+</html>

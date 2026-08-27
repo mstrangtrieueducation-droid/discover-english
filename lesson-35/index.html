@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1337">
+  <title>Discover English - Video 35</title>
+  <style>
+    :root {
+      --navy: #0b1337;
+      --ink: #17213d;
+      --muted: #5f6b82;
+      --line: #d8e0e9;
+      --page: #f3f6f9;
+      --paper: #ffffff;
+      --gold: #e7b63e;
+      --gold-soft: #fff8df;
+      --teal: #257d78;
+      --teal-soft: #eaf6f4;
+      --coral: #d95867;
+      --coral-soft: #fff0f2;
+      --blue-soft: #eaf3f8;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Arial, "Segoe UI", "Noto Sans", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      letter-spacing: 0;
+    }
+
+    button, a { font: inherit; }
+    a { color: inherit; }
+
+    .app {
+      width: min(1160px, 100%);
+      min-height: 100vh;
+      margin: 0 auto;
+      background: var(--paper);
+      box-shadow: 0 0 30px rgba(11, 19, 55, 0.06);
+    }
+
+    .brandbar {
+      display: grid;
+      grid-template-columns: 82px minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: center;
+      padding: 22px 32px;
+      border-top: 6px solid var(--gold);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brandbar img {
+      display: block;
+      width: 82px;
+      height: 82px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 6px 16px rgba(11, 19, 55, 0.16);
+    }
+
+    .eyebrow {
+      margin: 0 0 3px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 0;
+      color: var(--navy);
+      font-size: 36px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    h2 {
+      margin-bottom: 9px;
+      color: var(--navy);
+      font-size: 28px;
+      line-height: 1.3;
+      font-weight: 800;
+    }
+
+    h3 {
+      margin-bottom: 7px;
+      color: var(--navy);
+      font-size: 21px;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+
+    .code {
+      padding: 9px 13px;
+      border: 1px solid #cbdedb;
+      border-radius: 6px;
+      background: var(--teal-soft);
+      color: #185f5b;
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 30px;
+      align-items: center;
+      padding: 32px;
+      border-bottom: 1px solid #cfe0e9;
+      background: var(--blue-soft);
+    }
+
+    .intro p {
+      margin-bottom: 0;
+      color: #46536b;
+    }
+
+    .intro-note {
+      padding: 18px;
+      border-left: 5px solid var(--gold);
+      background: var(--paper);
+      color: #46536b;
+      font-size: 15px;
+    }
+
+    .intro-note strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--navy);
+    }
+
+    .view-toggle {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .tabs {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      padding: 12px 32px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.98);
+    }
+
+    .tabs label {
+      display: flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border-bottom: 4px solid transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .tab-number {
+      display: inline-flex;
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #e7ecf1;
+      color: #526078;
+      font-size: 13px;
+    }
+
+    #learn:checked ~ .tabs label[for="learn"],
+    #guide:checked ~ .tabs label[for="guide"] {
+      border-bottom-color: var(--teal);
+      color: var(--navy);
+    }
+
+    #learn:checked ~ .tabs label[for="learn"] .tab-number,
+    #guide:checked ~ .tabs label[for="guide"] .tab-number {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    .panel { display: none; }
+    #learn:checked ~ .panels #learn-panel,
+    #guide:checked ~ .panels #guide-panel { display: block; }
+
+    .section {
+      padding: 34px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-lead {
+      max-width: 800px;
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .step-links {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .step-links a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 62px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .step-links span {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .step-links a:nth-child(1) span { background: var(--teal); }
+    .step-links a:nth-child(2) span { background: #a97b0e; }
+    .step-links a:nth-child(3) span { background: var(--coral); }
+
+    .lesson {
+      display: grid;
+      grid-template-columns: 292px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+      padding: 36px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step-one { background: var(--teal-soft); }
+    .step-two { background: var(--gold-soft); }
+    .step-three { background: var(--coral-soft); }
+
+    .step-badge {
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .step-one .step-badge { background: var(--teal); }
+    .step-two .step-badge { background: #a97b0e; }
+    .step-three .step-badge { background: var(--coral); }
+
+    .lesson p {
+      margin-bottom: 16px;
+      color: #4d5a71;
+    }
+
+    .focus {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .focus li {
+      position: relative;
+      margin-top: 8px;
+      padding-left: 20px;
+      color: #36445e;
+      font-size: 15px;
+    }
+
+    .focus li::before {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      content: "";
+    }
+
+    .step-two .focus li::before { background: #a97b0e; }
+    .step-three .focus li::before { background: var(--coral); }
+
+    .video,
+    .sample-video {
+      overflow: hidden;
+      border: 1px solid #c6d0dc;
+      border-radius: 8px;
+      background: #080b14;
+      box-shadow: 0 10px 24px rgba(11, 19, 55, 0.12);
+    }
+
+    .video iframe,
+    .video video,
+    .sample-video iframe {
+      display: block;
+      width: 100%;
+      border: 0;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+    }
+
+    .subtitle-rule {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(170px, 0.34fr) minmax(0, 1fr);
+      margin-top: -4px;
+      overflow: hidden;
+      border: 1px solid #ead58b;
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: 0 10px 24px rgba(11, 19, 55, 0.08);
+    }
+
+    .rule-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 116px;
+      padding: 20px;
+      background: var(--navy);
+      color: #fff;
+      font-size: 16px;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .rule-label span {
+      color: var(--gold);
+      font-size: 21px;
+    }
+
+    .rule-copy {
+      padding: 22px 24px;
+      border-left: 5px solid var(--gold);
+    }
+
+    .rule-copy h4 {
+      margin: 0 0 7px;
+      color: var(--navy);
+      font-size: 20px;
+    }
+
+    .rule-copy p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .presentation-aid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .fullscreen-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 16px;
+      border: 1px solid var(--navy);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .fullscreen-link:hover {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .aid-note {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 14px;
+      border: 1px solid #efcbd0;
+      border-radius: 6px;
+      background: var(--paper);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .aid-note strong {
+      flex: 0 0 auto;
+      color: var(--coral);
+    }
+
+    .presentation-panel {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .presentation-item {
+      min-height: 145px;
+      padding: 20px;
+      border: 1px solid #efcbd0;
+      border-top: 5px solid var(--coral);
+      border-radius: 6px;
+      background: var(--paper);
+    }
+
+    .presentation-item strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--navy);
+    }
+
+    .presentation-item span {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .submit {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      padding: 32px;
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .submit h2 { color: #fff; }
+
+    .submit p {
+      max-width: 760px;
+      margin-bottom: 0;
+      color: #d9deeb;
+    }
+
+    .primary-button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      background: var(--gold);
+      color: #28200d;
+      text-decoration: none;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .primary-button:hover,
+    .primary-button:focus-visible {
+      outline: 3px solid rgba(231, 182, 62, 0.35);
+      outline-offset: 3px;
+      background: #f5ce6f;
+    }
+
+    .sample {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 28px;
+      align-items: center;
+      padding: 26px;
+      border: 1px solid #cbd7e2;
+      border-left: 6px solid var(--teal);
+      border-radius: 8px;
+      background: var(--blue-soft);
+    }
+
+    .sample p {
+      margin-bottom: 0;
+      color: #4d5a71;
+    }
+
+    .routine {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .routine-item {
+      min-height: 175px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+
+    .routine-number {
+      display: inline-flex;
+      width: 32px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .routine-item strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--navy);
+    }
+
+    .routine-item span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .camera-guide {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .camera-item {
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .camera-item.do {
+      border: 1px solid #bcdcd7;
+      background: var(--teal-soft);
+    }
+
+    .camera-item.dont {
+      border: 1px solid #efc5cb;
+      background: var(--coral-soft);
+    }
+
+    .camera-item strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+
+    .camera-item ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #4d5a71;
+    }
+
+    .footer {
+      padding: 18px 32px;
+      border-top: 1px solid var(--line);
+      background: #f1f4f8;
+      color: #677288;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .routine { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .routine-item:last-child { grid-column: 1 / -1; min-height: auto; }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        overscroll-behavior-y: contain;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .app { box-shadow: none; }
+
+      .brandbar {
+        grid-template-columns: 66px minmax(0, 1fr);
+        gap: 14px;
+        padding: 18px;
+      }
+
+      .brandbar img {
+        width: 66px;
+        height: 66px;
+      }
+
+      h1 { font-size: 27px; }
+      h2 { font-size: 23px; }
+
+      .code {
+        grid-column: 1 / -1;
+        justify-self: start;
+      }
+
+      .intro,
+      .lesson,
+      .submit,
+      .sample {
+        grid-template-columns: 1fr;
+      }
+
+      .intro,
+      .section,
+      .lesson,
+      .submit {
+        padding: 24px 18px;
+      }
+
+      .tabs {
+        position: static;
+        padding: 8px 12px;
+      }
+
+      .tabs label { font-size: 14px; }
+
+      .step-links,
+      .presentation-panel,
+      .routine,
+      .camera-guide {
+        grid-template-columns: 1fr;
+      }
+
+      .routine-item,
+      .routine-item:last-child {
+        grid-column: auto;
+        min-height: auto;
+      }
+
+      .subtitle-rule {
+        grid-template-columns: 1fr;
+        margin-top: 0;
+      }
+
+      .rule-label {
+        min-height: auto;
+        align-items: flex-start;
+        padding: 16px 18px;
+        text-align: left;
+      }
+
+      .rule-label span { font-size: 18px; }
+      .rule-copy { border-top: 4px solid var(--gold); border-left: 0; }
+      .aid-note { align-items: flex-start; }
+
+      .submit .primary-button { width: 100%; }
+    }
+  </style>
+<link rel="stylesheet" href="../android-video-controls.css" data-android-video-controls>
+  <link rel="stylesheet" href="../mobile-video-fallback.css?v=20260827-1">
+</head>
+<body>
+  <main class="app">
+    <header class="brandbar">
+      <img src="../ms-trang-trieu-education-logo.png" alt="Ms. Trang Trieu Education">
+      <div>
+        <p class="eyebrow">Discover English · Video 35</p>
+        <h1>Speak with confidence</h1>
+      </div>
+      <div class="code">Mã bài: DE-35</div>
+    </header>
+
+    <section class="intro">
+      <div>
+        <h2>Hiểu nội dung, thuyết trình theo hình ảnh</h2>
+        <p>Discover English giúp con học cách trình bày một chủ đề bằng những câu ngắn, rõ và tự nhiên. Con nghe, hiểu câu, luyện phát âm rồi dùng video không phụ đề làm hình ảnh hỗ trợ để tự thuyết trình trước camera.</p>
+      </div>
+      <div class="intro-note">
+        <strong>Mục tiêu của bài</strong>
+        Nói thành câu hoàn chỉnh, rõ âm cuối, có trọng âm và biết tương tác với hình ảnh bằng ánh mắt, cử chỉ, nét mặt.
+      </div>
+    </section>
+
+    <input class="view-toggle" type="radio" name="view" id="learn" checked>
+    <input class="view-toggle" type="radio" name="view" id="guide">
+
+    <nav class="tabs" aria-label="Nội dung bài học">
+      <label for="learn"><span class="tab-number">01</span> Học và luyện nói</label>
+      <label for="guide"><span class="tab-number">02</span> Mẫu và cách quay</label>
+    </nav>
+
+    <div class="panels">
+      <section class="panel" id="learn-panel">
+        <div class="section">
+          <h2>Con học theo 3 bước</h2>
+          <p class="section-lead">Con nghe bản gốc để nắm nội dung, dùng bản có phụ đề để hiểu chính xác câu, rồi dùng bản không phụ đề đã tắt âm sẵn để thuyết trình theo hình ảnh đang chạy. Không cần cố thuộc ngay sau một hoặc hai lần xem.</p>
+          <div class="step-links">
+            <a href="#step-1"><span>1</span> Nghe bản gốc</a>
+            <a href="#step-2"><span>2</span> Hiểu câu với phụ đề</a>
+            <a href="#step-3"><span>3</span> Thuyết trình theo hình ảnh</a>
+          </div>
+        </div>
+
+        <article class="lesson step-one" id="step-1">
+          <div>
+            <span class="step-badge">1</span>
+            <h3>Nghe để hiểu</h3>
+            <p>Con xem trọn video nhiều lần để hiểu người nói đang giới thiệu điều gì và cách các ý được nối với nhau.</p>
+            <ul class="focus">
+              <li>Lần đầu nghe liền mạch, chưa dừng từng câu.</li>
+              <li>Chú ý giọng nói, nhịp câu và cách biểu cảm.</li>
+              <li>Nghe lại trong nhiều ngày để câu ngấm tự nhiên.</li>
+            </ul>
+          </div>
+          <div class="video">
+            <div class="video-shell" data-drive-id="1nPOsC3J7p5LnNCigyPYI9WLzl3tGMmZh" data-title="Discover English Video 35 - bản gốc"></div>
+          </div>
+        </article>
+
+        <article class="lesson step-two" id="step-2">
+          <div>
+            <span class="step-badge">2</span>
+            <h3>Dùng phụ đề để hiểu kĩ câu</h3>
+            <p>Sau khi đã nghe bản gốc, con xem bản có phụ đề để kiểm tra từ, cấu trúc và chính xác từng câu người nói sử dụng.</p>
+            <ul class="focus">
+              <li>Đối chiếu điều con nghe với câu trên màn hình.</li>
+              <li>Chú ý trọng âm, chỗ ngắt và âm cuối.</li>
+              <li>Dừng từng đoạn ngắn để nói theo khi cần.</li>
+            </ul>
+          </div>
+          <div class="video">
+            <div class="video-shell" data-drive-id="1tMoBLXgxnQhg4CWsyAGm_oxWT1V1POSt" data-title="Discover English Video 35 - bản có phụ đề"></div>
+          </div>
+          <div class="subtitle-rule">
+            <strong class="rule-label">Hai video,<span>hai cách dùng</span></strong>
+            <div class="rule-copy">
+              <h4>Phụ đề để luyện. Bản không phụ đề để trình bày.</h4>
+              <p>Con dùng phụ đề để hiểu và kiểm tra câu trước khi quay. Khi thuyết trình, con bấm phát bản không phụ đề đã tắt âm sẵn và dùng hình ảnh làm công cụ dẫn dắt phần nói.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="lesson step-three" id="step-3">
+          <div>
+            <span class="step-badge">3</span>
+            <h3>Thuyết trình với video không phụ đề</h3>
+            <p>Con bấm phát bản không phụ đề đã được tắt âm sẵn. Các cảnh trong video là hình ảnh hỗ trợ để con chủ động dẫn lời, chỉ vào hình ảnh và phản ứng tự nhiên theo nội dung đang hiện.</p>
+            <ul class="focus">
+              <li>Cố gắng nhắc lại đầy đủ và chính xác câu mẫu.</li>
+              <li>Có thể nhìn, chỉ và tương tác với hình ảnh rồi hướng lại về camera.</li>
+              <li>Không mở phụ đề và không đọc chữ trong lúc trình bày.</li>
+            </ul>
+          </div>
+          <div class="presentation-aid">
+            <div class="video">
+              <div class="video-shell" data-drive-id="1nPOsC3J7p5LnNCigyPYI9WLzl3tGMmZh" data-title="Discover English Video 35 - hình ảnh hỗ trợ không phụ đề"></div>
+            </div>
+            <a class="fullscreen-link" href="./video.html" target="_blank" rel="noopener">Mở bản tắt tiếng toàn màn hình</a>
+            <div class="aid-note">
+              <strong>Đã tắt âm sẵn</strong>
+              <span>Con chỉ cần bấm phát: video dẫn hình ảnh, con là người dẫn lời.</span>
+            </div>
+          </div>
+          <div class="presentation-panel" aria-label="Cách dùng video khi thuyết trình">
+            <div class="presentation-item">
+              <strong>Video dẫn hình</strong>
+              <span>Cho bản không phụ đề đã tắt âm sẵn chạy ở màn hình hỗ trợ trước khi bắt đầu.</span>
+            </div>
+            <div class="presentation-item">
+              <strong>Con dẫn lời</strong>
+              <span>Nói đầy đủ, chính xác những câu đã luyện theo nội dung video.</span>
+            </div>
+            <div class="presentation-item">
+              <strong>Tương tác tự nhiên</strong>
+              <span>Dùng ánh mắt, tay và nét mặt để kết nối với hình ảnh, sau đó hướng lại về camera.</span>
+            </div>
+          </div>
+        </article>
+
+        <section class="submit">
+          <div>
+            <h2>Nộp video thuyết trình</h2>
+            <p>Con quay chính diện để thấy rõ con và màn hình hình ảnh hỗ trợ; bản không phụ đề ở bước 3 đã được tắt âm sẵn. <strong>TUYỆT ĐỐI không quay màn hình.</strong> Sau khi quay xong, con ấn nút bên cạnh để nộp đúng bài <strong>DE-35</strong>.</p>
+          </div>
+          <a class="primary-button" data-form-link href="https://docs.google.com/forms/d/e/1FAIpQLSe3RZ0Mu_xM0QdBh4R5zAfMlGQQT0nWJ7-O88GZReZ0VhggvQ/viewform?usp=pp_url&amp;entry.1077842338=DE-35" target="_blank" rel="noopener">Nộp bài DE-35</a>
+        </section>
+      </section>
+
+      <section class="panel" id="guide-panel">
+        <div class="section">
+          <div class="sample">
+            <div>
+              <h2>Video mẫu để con tham khảo</h2>
+              <p>Con chú ý cách bạn dùng video không phụ đề làm hình ảnh hỗ trợ: vừa nói, vừa chỉ và tương tác với nội dung đang chạy. Con dùng đúng lời đã luyện nhưng chủ động trình bày theo hình ảnh, không đọc phụ đề.</p>
+            </div>
+            <div class="sample-video">
+              <iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/7v5fYhS9XYA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="Video mẫu thuyết trình Discover English"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <section class="section">
+          <h2>Cách luyện hiệu quả</h2>
+          <p class="section-lead">Con đi lần lượt qua các bước dưới đây. Chỉ quay bài khi con đã hiểu nội dung và có thể dùng bản không phụ đề làm hình ảnh dẫn dắt mà không cần đọc chữ.</p>
+          <div class="routine">
+            <div class="routine-item">
+              <span class="routine-number">1</span>
+              <strong>Nghe nhiều ngày</strong>
+              <span>Mỗi ngày xem ít nhất một lần để quen câu, âm và nhịp nói.</span>
+            </div>
+            <div class="routine-item">
+              <span class="routine-number">2</span>
+              <strong>Nói theo đoạn ngắn</strong>
+              <span>Nghe một ý ngắn, dừng lại và bắt chước cách người nói thể hiện.</span>
+            </div>
+            <div class="routine-item">
+              <span class="routine-number">3</span>
+              <strong>Kiểm tra phụ đề</strong>
+              <span>Đối chiếu từ và câu khi chưa nghe rõ; không học bằng cách chỉ đọc chữ.</span>
+            </div>
+            <div class="routine-item">
+              <span class="routine-number">4</span>
+              <strong>Tập với bản không phụ đề</strong>
+              <span>Bấm phát bản không phụ đề đã tắt âm sẵn và luyện chuyển lời theo từng cảnh bằng ánh mắt, tay và nét mặt.</span>
+            </div>
+            <div class="routine-item">
+              <span class="routine-number">5</span>
+              <strong>Quay một bài trọn vẹn</strong>
+              <span>Nói từ đầu đến cuối rõ ràng; không cần ghép nhiều đoạn ngắn.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Cách đặt camera và màn hình video</h2>
+          <div class="camera-guide">
+            <div class="camera-item do">
+              <strong>Con cần làm</strong>
+              <ul>
+                <li>Đặt camera chính diện, nơi đủ sáng và yên tĩnh.</li>
+                <li>Bố trí màn hình video ở cạnh hoặc phía sau để thấy rõ cả con và hình ảnh hỗ trợ.</li>
+                <li>Bấm phát video đã tắt âm sẵn, nói đủ lớn và tương tác tự nhiên theo từng cảnh.</li>
+              </ul>
+            </div>
+            <div class="camera-item dont">
+              <strong>Con không làm</strong>
+              <ul>
+                <li><strong>TUYỆT ĐỐI không quay màn hình.</strong> Camera phải quay chính diện con.</li>
+                <li>Không mở bản có phụ đề để nhìn và đọc.</li>
+                <li>Ưu tiên câu nói đầy đủ, rõ ràng và chính xác.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="submit">
+          <div>
+            <h2>Sẵn sàng nộp bài</h2>
+            <p>Con kiểm tra lại hình ảnh, âm thanh và tên tệp, sau đó ấn nút bên cạnh để nộp đúng bài <strong>DE-35</strong>.</p>
+          </div>
+          <a class="primary-button" data-form-link href="https://docs.google.com/forms/d/e/1FAIpQLSe3RZ0Mu_xM0QdBh4R5zAfMlGQQT0nWJ7-O88GZReZ0VhggvQ/viewform?usp=pp_url&amp;entry.1077842338=DE-35" target="_blank" rel="noopener">Nộp bài DE-35</a>
+        </section>
+      </section>
+    </div>
+
+    <footer class="footer">Ms. Trang Trieu Education · Discover English</footer>
+  </main>
+<script src="../android-video-controls.js" defer data-android-video-controls></script>
+  <script src="../mobile-video-fallback.js?v=20260827-1"></script>
+</body>
+</html>

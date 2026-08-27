@@ -1,0 +1,95 @@
+html.android-video-device,
+html.android-video-device body {
+  min-height: 100%;
+  overflow-y: auto !important;
+  overscroll-behavior-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+.android-video-device .android-video-shell {
+  position: relative !important;
+  inset: auto !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  min-width: 0;
+  min-height: 0 !important;
+  overflow: hidden;
+  aspect-ratio: auto !important;
+  background: #080b14;
+  touch-action: pan-y;
+}
+
+.android-video-device .android-video-shell > iframe {
+  position: relative !important;
+  inset: auto !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  border: 0;
+  aspect-ratio: 16 / 9;
+  pointer-events: none !important;
+}
+
+.android-video-device .android-video-shell.video-enabled > iframe {
+  pointer-events: auto !important;
+}
+
+.android-video-toggle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  transform: translate(-50%, -50%);
+  border: 2px solid #fff;
+  border-radius: 6px;
+  background: rgba(11, 19, 55, 0.94);
+  color: #fff;
+  cursor: pointer;
+  font: 800 15px/1.2 Arial, "Segoe UI", sans-serif;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.android-video-shell.video-enabled > .android-video-toggle {
+  top: 8px;
+  right: 8px;
+  left: auto;
+  min-height: 38px;
+  padding: 7px 11px;
+  transform: none;
+  border-width: 1px;
+  background: #a3213b;
+  font-size: 13px;
+}
+
+.android-video-open {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-top: 1px solid #cad3df;
+  background: #fff;
+  color: #0b1337;
+  font: 800 15px/1.35 Arial, "Segoe UI", sans-serif;
+  letter-spacing: 0;
+  text-align: center;
+  text-decoration: none;
+}
+
+.android-video-device a[href*="docs.google.com/forms"],
+.android-video-device a[href*="forms.gle"],
+.android-video-device a[data-form-link],
+.android-video-device a[data-google-form-url],
+.android-video-device a.form-link,
+.android-video-device a.submit-link {
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: rgba(11, 19, 55, 0.18);
+}
